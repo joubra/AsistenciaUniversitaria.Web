@@ -1,0 +1,46 @@
+﻿@model AsistenciaUniversitaria.Web.Models.Carrera
+@using AsistenciaUniversitaria.Web.Models
+
+@{
+    ViewData["Title"] = "Editar Carrera";
+    var escuelas = ViewBag.Escuelas as List<Escuela>;
+}
+
+<h1>Editar Carrera</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Escuela</label>
+        <select name="EscuelaId" class="form-select">
+            @if (escuelas != null)
+            {
+                foreach (var e in escuelas)
+                {
+                    <option value="@e.Id" selected="@(e.Id == Model.EscuelaId)">
+                        @e.Nombre
+                    </option>
+
+                }
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input name="Nombre" class="form-control" value="@Model.Nombre" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select name="Estado" class="form-select">
+            <option value="activo" selected="@(Model.Estado == "activo")">Activo</option>
+            <option value="inactivo" selected="@(Model.Estado == "inactivo")">Inactivo</option>
+        </select>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

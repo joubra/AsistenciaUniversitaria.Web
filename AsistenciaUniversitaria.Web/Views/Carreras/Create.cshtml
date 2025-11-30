@@ -1,0 +1,38 @@
+﻿@using AsistenciaUniversitaria.Web.Models
+@{
+    ViewData["Title"] = "Agregar Carrera";
+    var escuelas = ViewBag.Escuelas as List<Escuela>;
+}
+
+<h1>Agregar Carrera</h1>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label class="form-label">Escuela</label>
+        <select name="EscuelaId" class="form-select">
+            @if (escuelas != null)
+            {
+                foreach (var e in escuelas)
+                {
+                    <option value="@e.Id">@e.Nombre</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input name="Nombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select name="Estado" class="form-select">
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

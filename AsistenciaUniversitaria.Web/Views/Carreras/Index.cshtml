@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AsistenciaUniversitaria.Web.Models.Carrera>
+
+@{
+    ViewData["Title"] = "Carreras";
+}
+
+<h1>Carreras</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar Carrera</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Escuela</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Escuela?.Nombre</td>
+                <td>@item.Nombre</td>
+                <td>@item.Estado</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

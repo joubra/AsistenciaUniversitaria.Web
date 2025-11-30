@@ -1,0 +1,45 @@
+﻿@model AsistenciaUniversitaria.Web.Models.Escuela
+
+@{
+    ViewData["Title"] = "Editar Escuela";
+}
+
+<h1>Editar Escuela</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="RecintoId" class="form-label"></label>
+        <select asp-for="RecintoId" class="form-select" asp-items="ViewBag.RecintoId">
+            <option value="">-- Seleccione un recinto --</option>
+        </select>
+        <span asp-validation-for="RecintoId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Estado" class="form-label"></label>
+        <select asp-for="Estado" class="form-select">
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+        </select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

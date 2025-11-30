@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AsistenciaUniversitaria.Web.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<h1>Usuarios</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo usuario</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.First().Nombre)</th>
+            <th>@Html.DisplayNameFor(m => m.First().Correo)</th>
+            <th>@Html.DisplayNameFor(m => m.First().Rol)</th>
+            <th>@Html.DisplayNameFor(m => m.First().Estado)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Correo</td>
+                <td>@item.Rol</td>
+                <td>@item.Estado</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

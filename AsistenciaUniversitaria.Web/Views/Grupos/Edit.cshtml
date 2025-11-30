@@ -1,0 +1,53 @@
+﻿@model AsistenciaUniversitaria.Web.Models.Grupo
+@using AsistenciaUniversitaria.Web.Models
+
+@{
+    ViewData["Title"] = "Editar Grupo";
+    var carreras = ViewBag.Carreras as List<Carrera>;
+}
+
+<h1>Editar Grupo</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Carrera</label>
+        <select name="CarreraId" class="form-select">
+            @if (carreras != null)
+            {
+                foreach (var c in carreras)
+                {
+                    <option value="@c.Id" selected="@(c.Id == Model.CarreraId)">
+                        @c.Nombre
+                    </option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nombre del grupo</label>
+        <input name="Nombre" class="form-control" value="@Model.Nombre" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Turno</label>
+        <select name="Turno" class="form-select">
+            <option value="mañana" selected="@(Model.Turno == "mañana")">Mañana</option>
+            <option value="tarde" selected="@(Model.Turno == "tarde")">Tarde</option>
+            <option value="noche" selected="@(Model.Turno == "noche")">Noche</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select name="Estado" class="form-select">
+            <option value="activo" selected="@(Model.Estado == "activo")">Activo</option>
+            <option value="inactivo" selected="@(Model.Estado == "inactivo")">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

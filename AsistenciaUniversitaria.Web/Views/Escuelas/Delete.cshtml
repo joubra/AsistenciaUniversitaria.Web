@@ -1,0 +1,26 @@
+﻿@model AsistenciaUniversitaria.Web.Models.Escuela
+
+@{
+    ViewData["Title"] = "Eliminar Escuela";
+}
+
+<h1>Eliminar Escuela</h1>
+
+<h4>¿Está seguro que desea eliminar esta escuela?</h4>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">Recinto</dt>
+    <dd class="col-sm-10">@Model.Recinto?.Nombre</dd>
+
+    <dt class="col-sm-2">@Html.DisplayNameFor(m => m.Nombre)</dt>
+    <dd class="col-sm-10">@Model.Nombre</dd>
+
+    <dt class="col-sm-2">@Html.DisplayNameFor(m => m.Estado)</dt>
+    <dd class="col-sm-10">@Model.Estado</dd>
+</dl>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
