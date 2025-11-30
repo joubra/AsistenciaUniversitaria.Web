@@ -1,0 +1,32 @@
+﻿@model AsistenciaUniversitaria.Web.Models.Estudiante
+
+@{
+    ViewData["Title"] = "Editar Estudiante";
+}
+
+<h1>Editar Estudiante</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input name="Nombre" class="form-control" value="@Model.Nombre" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select name="Estado" class="form-select">
+            <option value="activo" selected="@(Model.Estado == "activo")">Activo</option>
+            <option value="inactivo" selected="@(Model.Estado == "inactivo")">Inactivo</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Carnet</label>
+        <input name="Carnet" class="form-control" value="@Model.Carnet" />
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
