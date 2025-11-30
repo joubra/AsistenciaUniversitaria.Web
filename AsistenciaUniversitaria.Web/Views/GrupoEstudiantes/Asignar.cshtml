@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AsistenciaUniversitaria.Web.Models.Estudiante>
+@{
+    var grupo = ViewBag.Grupo;
+    List<int> asignados = ViewBag.Asignados;
+}
+
+<h2>Asignar Estudiantes a: @grupo.Nombre</h2>
+
+<form method="post">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Seleccionar</th>
+                <th>Nombre</th>
+                <th>Carnet</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="estudiantesSeleccionados"
+                               value="@e.Id" @(asignados.Contains(e.Id) ? "checked" : "") />
+                    </td>
+                    <td>@e.Nombre</td>
+                    <td>@e.Carnet</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-controller="Grupos" asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

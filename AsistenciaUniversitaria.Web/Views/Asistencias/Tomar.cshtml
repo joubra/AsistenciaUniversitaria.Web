@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AsistenciaUniversitaria.Web.Models.Estudiante>
+@{
+    var grupo = ViewBag.Grupo;
+    var fecha = (DateTime)ViewBag.Fecha;
+    var asistenciasPrevias = ViewBag.Asistencias as List<AsistenciaUniversitaria.Web.Models.Asistencia>;
+}
+
+<h2>Asistencia - @grupo.Nombre (@fecha.ToShortDateString())</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="grupoId" value="@grupo.Id" />
+    <input type="hidden" name="fecha" value="@fecha.ToString("yyyy-MM-dd")" />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Carnet</th>
+                <th>Estado</th>
+                <th>Nota</th>
+                <th>Archivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                var e = Model.ElementAt(i);
+                var prev = asistenciasPrevias.FirstOrDefault(x => x.EstudianteId == e.Id);
+
+                <tr>
+                    <td>@e.Nombre</td>
+                    <td>@e.Carnet</td>
+
+                    <td>
+                        <input type="hidden" name="estudianteId" value="@e.Id" />
+
+                        <select name="estado" class="form-select">
+                            <option value="asistio" selected="@(prev?.Estado == "asistio")">Asistió</option>
+                            <option value="ausente" selected="@(prev?.Estado == "ausente")">Ausente</option>
+                            <option value="justificado" selected="@(prev?.Estado == "justificado")">Justificado</option>
+                        </select>
+
+
+                    </td>
+
+                    <td>
+                        <input type="text" name="nota" class="form-control" value="@prev?.Nota" />
+                    </td>
+
+                    <td>
+                        <input type="file" name="archivo" class="form-control" />
+                        @if (!string.IsNullOrEmpty(prev?.Archivo))
+                        {
+                            <a href="/justificaciones/@prev.Archivo" target="_blank">Ver archivo</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">Guardar Asistencia</button>
+    <a asp-controller="Grupos" asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

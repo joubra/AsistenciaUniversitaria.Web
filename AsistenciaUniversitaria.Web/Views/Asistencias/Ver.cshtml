@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AsistenciaUniversitaria.Web.Models.Asistencia>
+
+@{
+    var grupo = ViewBag.Grupo as AsistenciaUniversitaria.Web.Models.Grupo;
+    var fecha = (DateTime)ViewBag.Fecha;
+    ViewData["Title"] = "Ver Asistencia";
+}
+
+<h2>Asistencia de @grupo.Nombre (@fecha.ToShortDateString())</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Estudiante</th>
+            <th>Carnet</th>
+            <th>Estado</th>
+            <th>Nota</th>
+            <th>Archivo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.Estudiante?.Nombre</td>
+                <td>@a.Estudiante?.Carnet</td>
+                <td>@a.Estado</td>
+                <td>@a.Nota</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(a.Archivo))
+                    {
+                        <a href="/justificaciones/@a.Archivo" target="_blank">Ver archivo</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Grupos" asp-action="Index" class="btn btn-secondary">Volver</a>

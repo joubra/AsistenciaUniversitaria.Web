@@ -1,8 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1 class="mb-4">Sistema de Asistencia Universitaria</h1>
+<p class="lead">Bienvenido, @User.Identity?.Name</p>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Catálogos</h5>
+                <p class="card-text">Gestione la estructura académica.</p>
+                <a asp-controller="Recintos" asp-action="Index" class="btn btn-outline-primary btn-sm">Recintos</a>
+                <a asp-controller="Escuelas" asp-action="Index" class="btn btn-outline-primary btn-sm">Escuelas</a>
+                <a asp-controller="Carreras" asp-action="Index" class="btn btn-outline-primary btn-sm">Carreras</a>
+                <a asp-controller="Grupos" asp-action="Index" class="btn btn-outline-primary btn-sm mt-2">Grupos</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Personas</h5>
+                <p class="card-text">Administrar usuarios y estudiantes.</p>
+                <a asp-controller="Usuarios" asp-action="Index" class="btn btn-outline-secondary btn-sm">Usuarios</a>
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn btn-outline-secondary btn-sm">Estudiantes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Asistencias</h5>
+                <p class="card-text">Registrar y consultar asistencias.</p>
+                <a asp-controller="Grupos" asp-action="Index" class="btn btn-success btn-sm">Pasar asistencia</a>
+                <a asp-controller="Asistencias" asp-action="Ver" asp-route-grupoId="1" class="btn btn-outline-success btn-sm mt-2">
+                    Ver asistencia (ejemplo)
+                </a>
+                <p class="text-muted mt-2 mb-0" style="font-size:0.8rem;">
+                    *El docente ingresa a Grupos para asignar estudiantes y pasar asistencia.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>

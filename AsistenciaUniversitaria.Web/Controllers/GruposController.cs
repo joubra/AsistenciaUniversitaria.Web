@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AsistenciaUniversitaria.Web.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin,docente")]
     public class GruposController : Controller
     {
         private readonly ApplicationDbContext _context;
